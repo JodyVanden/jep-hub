@@ -4,6 +4,8 @@ import organizationQuery from "./OrganizationQuery"
 import Issue from "./issue"
 import { render } from 'react-dom';
 
+// adding a coment for the pull request
+
 type OrganizationProps = {
   repositories: {nodes: Repository[]},
   login: string,
