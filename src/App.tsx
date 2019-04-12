@@ -1,26 +1,40 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { ApolloProvider } from "react-apollo";
+
+import ApolloClient from "./ApolloClient"
+
+import Organization from "./Organization"
+
 import './App.css';
 
+
 class App extends Component {
+  state = {
+    states: ["OPEN", "CLOSED"]
+  }
+
+  open = () => {
+    this.setState({states: ["OPEN"]})
+  }
+
+  close = () => {
+    this.setState({states: ["CLOSED"]})
+  }
+
+  noFilter = () => {
+    this.setState({states: ["OPEN", "CLOSED"]})
+  }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.tsx</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <ApolloProvider client={ApolloClient}>
+        <div className="App">
+        <button onClick={this.open}>Open</button>
+        <button onClick={this.close}>Closed</button>
+        <button onClick={this.noFilter}>No filter</button>
+
+          <Organization login="rubysherpas" states={this.state.states}/>
+        </div>
+      </ApolloProvider>
     );
   }
 }
